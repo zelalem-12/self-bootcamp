@@ -14,7 +14,5 @@ function minNumberOfCoinsToChangeMoney(money, coins){
 }
 
 
-
-
-console.log(minNumberOfCoinsToChangeMoney(28,[1, 5, 10]))
+console.log(minNumberOfCoinsToChangeMoney(998,[2, 4, 8]))
 console.log(minNumberOfCoinsToChangeMoney(8, [1, 4, 6]))

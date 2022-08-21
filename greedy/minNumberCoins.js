@@ -11,9 +11,11 @@ function minNumberOfCoinsToChangeMoney(money, coins){
         }
     }
  
+    console.log(money)
     return numberOfCoins;
 }
 
 
-console.log(minNumberOfCoinsToChangeMoney(28,[1, 5, 10]))
-console.log(minNumberOfCoinsToChangeMoney(8, [1, 4, 6]))
+// console.log(minNumberOfCoinsToChangeMoney(28,[1, 5, 10]))
+// console.log(minNumberOfCoinsToChangeMoney(8, [1, 4, 6]))
+console.log(minNumberOfCoinsToChangeMoney(997,[2, 4, 8]))
