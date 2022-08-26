@@ -12,6 +12,7 @@ function changeMaking(target, denominations){
         if(i > 0) leaveChoice = subproblem(t, i-1)
         return cache[`${t}${i}`] = Math.min(intakeChoice, leaveChoice);
     }
+    console.log(target)
     if(target !== 0) return - 1
     return subproblem(target, denominations.length - 1)
 }
