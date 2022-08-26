@@ -16,25 +16,24 @@ function iterative(n){
     return current;
 }
 
-let iCache = [];
-function memorizedrecursive(n){
+
+function memorizedrecursive(n, cache=[]){
         if(n <= 1 )return n;
-        if(iCache[n] )return iCache[n];
-        return iCache[n] = memorizedrecursive(n - 1) + memorizedrecursive(n - 2)
+        if(cache[n] )return cache[n];
+        return cache[n] = memorizedrecursive(n - 1, cache) + memorizedrecursive(n - 2, cache)
     }
 
 function memorizedIterative(n){ // Also called bottom_up approach
-    const cache = Array(n + 1).fill(-1);
-    cache[0] = 0;
-    cache[1] = 1;
-
+    let second = 0, first = 1;
     for(let i = 2; i <= n; i++){
-        cache[i] = cache[i - 1] + cache[i - 2]
+        temp = first + second;
+        second = first;
+        first = temp;
     }
-    return cache[n]
+    return first;
 }
 
-const num = 1000;
+const num = 30;
 
 // console.time('testR')
 
