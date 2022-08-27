@@ -12,7 +12,8 @@ function changeMaking(target, denominations){
         if(i > 0) leaveChoice = subproblem(t, i-1)
         return cache[`${t}${i}`] = Math.min(intakeChoice, leaveChoice);
     }
-    return Number.isFinite(subproblem(target, denominations.length - 1))? result: -1
+    const result = subproblem(target, denominations.length - 1);
+    return Number.isFinite(result)? result: -1
 }
 
 
@@ -21,4 +22,5 @@ console.log(changeMaking(28, [1, 5, 10]))
 console.log(changeMaking(8,[1, 4, 6]))
 console.log(changeMaking(16, [1, 5, 12, 19]))
 console.log(changeMaking(33, [16,1, 25,5]))
-console.log(changeMaking(31, [2,  10]))
+console.log(changeMaking(31, [2,  10]));
+console.log(changeMaking(78, [39, 3, 50, 25]));
