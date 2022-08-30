@@ -1,3 +1,12 @@
+function iterativeCombination(elements){
+   let combintaitons = [[]];
+
+   for(const item of elements)
+   combintaitons = combintaitons.concat(combintaitons.map(comb => [...comb, item]));
+   return combintaitons;
+}
+
+
 
 function recursiveCombination(elements){
     const combinations = [];
@@ -13,4 +22,6 @@ function recursiveCombination(elements){
     return combinations;
 }
 
+
+console.log(iterativeCombination([2,1,3]));
 console.log(recursiveCombination([2,1,3]));
