@@ -75,5 +75,5 @@ console.log(list.contains('d'))
 console.log(list.contains('z'))
 console.log(list.contains('x'))
 
-list.deleteValue('c');
+list.deleteValue('a');
 list.print();

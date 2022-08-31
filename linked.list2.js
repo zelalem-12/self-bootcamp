@@ -40,29 +40,48 @@ class LinkedList{
    contains(target){
     return this._contains(target, this.head)
    }
+   
    _contains(target, current){
     if(current === null) return false;
     if(target === current.val) return true;
      return this._contains(target, current.next)
    }
+
+
+   deleteValue(target){
+    if(target === this.head.val) return this.head = this.head.next;
+    this._deleteValue(this.head,null, target)
+   }
+   _deleteValue(current, prev, target){
+    if(current === null) return;
+    if(current.val === target) {
+        prev.next = current.next;
+        return ; // All node values are unique; else remove the return statment
+    }
+    this._deleteValue(current.next,current, target)
+   }
 }
 
 
 
-const lsit = new LinkedList();
+const list = new LinkedList();
 
-lsit.append('a')
-lsit.append('b')
-lsit.append('c')
-lsit.append('d')
+list.append('a')
+list.append('b')
+list.append('c')
+list.append('d')
 
-lsit.print();
+list.print();
 
 
-console.log(lsit.contains('a'))
-console.log(lsit.contains('b'))
-console.log(lsit.contains('c'))
-console.log(lsit.contains('d'))
+console.log(list.contains('a'))
+console.log(list.contains('b'))
+console.log(list.contains('c'))
+console.log(list.contains('d'))
 
-console.log(lsit.contains('z'))
-console.log(lsit.contains('x'))
+console.log(list.contains('z'))
+console.log(list.contains('x'))
+
+list.deleteValue('a');
+list.deleteValue('c');
+list.print();
