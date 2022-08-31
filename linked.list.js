@@ -53,6 +53,20 @@ class LinkedList{
     }
     return this.head;
    }
+   reverseLists(){
+    let prev = null;
+    let current = this.head;
+
+    while(current !== null){  
+        const next = current.next;
+        current.next = prev;
+        prev = current;
+        current = next;
+    }
+    this.head = prev;
+    console.log(this.head)
+    return this.head;
+   }
 }
 
 
@@ -75,5 +89,6 @@ console.log(list.contains('d'))
 console.log(list.contains('z'))
 console.log(list.contains('x'))
 
-list.deleteValue('a');
+// list.deleteValue('a');
+list.reverseLists()
 list.print();
