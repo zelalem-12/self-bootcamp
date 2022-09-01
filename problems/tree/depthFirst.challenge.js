@@ -166,5 +166,26 @@ function preOrder(root){
 /* 
 Note: In order traversal is't applicable for N-ary tree problem.
 */
-console.log(postorder(first1))
-console.log(preOrder(first1))
+// console.log(postorder(first1))
+// console.log(preOrder(first1))
+
+
+// N-ary tree level order traversal
+
+// Impelmente with preorder traversal
+
+function levelOrder(root){
+    if(root === null)  return [];
+    const output = [];
+    function _levelOrder(node, output, level){
+        if(output.length === level) output.push([]);
+        output[level].push(node.val);
+        const children = node.children ? node.children : [null];
+        for(const child of children){
+            if(child !== null) _levelOrder(child, output, level + 1)
+        }
+    }
+    _levelOrder(root, output, 0)
+    return output;
+}
+console.log(levelOrder(first1))

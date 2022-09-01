@@ -13,8 +13,41 @@ const c = new Node('c');
 const d = new Node('d');
 const e = new Node('e');
 const f = new Node('f');
+const g = new Node('g');
 
-// Implementing a breadth first search traversal
+
+// Implementing a breadth(level) first search traversal
+
+// Recursive with grouping by level
+
+
+/*       a
+
+    b         c
+
+ d    e            f
+
+
+*/
+// to be studied 
+function levelOrderTraverse(root){
+    if(root === null) return [];
+    const output = [];
+    function _levelOrderTraverse(node, output, level){
+        if(level === output.length ) output.push([]);
+        output[level].push(node.val);
+        if(node.left !== null) _levelOrderTraverse(node.left, output, level + 1);
+        if(node.right !== null) _levelOrderTraverse(node.right, output, level + 1) 
+    }
+    _levelOrderTraverse(root, output, 0)
+    return output;
+}
+
+
+
+
+
+// Iterative implementation
 function breadthFirstTraverse(root){
     const queue = [root];
 
@@ -176,6 +209,7 @@ a.right = c;
 b.left =  d;
 b.right = e;
 c.right = f;   
+c.left= g;
 
 
 // Build a binary tree from a list of nodes 
@@ -202,34 +236,34 @@ num3.right = num6;
 
 
 breadthFirstTraverse(a)
-
-console.log(breadthFirstSearch(a, 'd'));
-console.log(breadthFirstSearch(a, 'z'));
-
-
-console.log("_____________________")
-
-breadthFirstTraverse(num1);
-
-console.log(breadthFirstSearch(num1, 5));
-console.log(breadthFirstSearch(num1, 9));
-
-console.log(sumTreeWithBFT(num1))
-
-console.log("_____________________")
+console.log(levelOrderTraverse(a))
+// console.log(breadthFirstSearch(a, 'd'));
+// console.log(breadthFirstSearch(a, 'z'));
 
 
-depthFirstTraverse(num1);
+// console.log("_____________________")
 
-console.log(depthFirstSearch(num1, 5));
-console.log(depthFirstSearch(num1, 9));
+// breadthFirstTraverse(num1);
 
-console.log(sumTreeWithDFT(num1));
-console.log(sumTreeUsingPreOrderTraversing(num1));
-console.log("________BFS _____________")
+// console.log(breadthFirstSearch(num1, 5));
+// console.log(breadthFirstSearch(num1, 9));
 
-preOrderTraversal(num1);
-console.log("_____________________")
-postOrderTraversal(num1);
-console.log("_____________________")
-inOrderTraversal(num1);
+// console.log(sumTreeWithBFT(num1))
+
+// console.log("_____________________")
+
+
+// depthFirstTraverse(num1);
+
+// console.log(depthFirstSearch(num1, 5));
+// console.log(depthFirstSearch(num1, 9));
+
+// console.log(sumTreeWithDFT(num1));
+// console.log(sumTreeUsingPreOrderTraversing(num1));
+// console.log("________BFS _____________")
+
+// preOrderTraversal(num1);
+// console.log("_____________________")
+// postOrderTraversal(num1);
+// console.log("_____________________")
+// inOrderTraversal(num1);
