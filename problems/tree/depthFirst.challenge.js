@@ -149,8 +149,22 @@ function postorder(root){
     return output;
 }
 
+// N-ary pre order traversal
 
+function preOrder(root){
+    const output = [];
+    function _preOrder(node){
+        if(node === null) return;
+            output.push(node.val);
+            const children = node.children ? node.children : [null]
+            for(const child of children)
+            _preOrder(child);
+    }
+    _preOrder(root);
+    return output;
+}
 /* 
 Note: In order traversal is't applicable for N-ary tree problem.
 */
 console.log(postorder(first1))
+console.log(preOrder(first1))
