@@ -33,6 +33,13 @@ function breadthFirstTraverse(root){
     }
 }
 
+function depthFirstTraverseRecursively(root){
+    if(root === null) return;
+    console.log(root.val)
+    depthFirstTraverseRecursively(root.left);
+    depthFirstTraverseRecursively(root.right);
+}
+
 //  Implemening depth first traversal
  function depthFirstTraverse(root){
     const stack = [root];
@@ -189,4 +196,6 @@ depthFirstTraverse(num1);
 console.log(depthFirstSearch(num1, 5));
 console.log(depthFirstSearch(num1, 9));
 
-console.log(sumTreeWithDFT(num1))
+console.log(sumTreeWithDFT(num1));
+
+depthFirstTraverseRecursively(num1)
