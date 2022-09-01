@@ -14,9 +14,6 @@ const d = new Node('d');
 const e = new Node('e');
 const f = new Node('f');
 
-
-
-
 // Implementing a breadth first search traversal
 function breadthFirstTraverse(root){
     const queue = [root];
@@ -33,12 +30,37 @@ function breadthFirstTraverse(root){
     }
 }
 
-function depthFirstTraverseRecursively(root){
+//  Implemening depth first traversal recursively
+
+
+// 1 Pre-Order traversal  Self, left and then right
+function preOrderTraversal(root){
     if(root === null) return;
     console.log(root.val)
-    depthFirstTraverseRecursively(root.left);
-    depthFirstTraverseRecursively(root.right);
+    preOrderTraversal(root.left);
+    preOrderTraversal(root.right);
 }
+
+
+// 1 Post-Order traversal   left  right and then Self,
+function postOrderTraversal(root){
+    if(root === null) return;
+    postOrderTraversal(root.left);
+    postOrderTraversal(root.right);
+    console.log(root.val)
+}
+
+// 1 In-Order traversal left, left then Right,
+function inOrderTraversal(root){
+    if(root === null) return;
+    inOrderTraversal(root.left);
+    console.log(root.val);
+    inOrderTraversal(root.right);
+}
+
+
+
+
 
 //  Implemening depth first traversal
  function depthFirstTraverse(root){
@@ -197,5 +219,10 @@ console.log(depthFirstSearch(num1, 5));
 console.log(depthFirstSearch(num1, 9));
 
 console.log(sumTreeWithDFT(num1));
+console.log("________BFS _____________")
 
-depthFirstTraverseRecursively(num1)
+preOrderTraversal(num1);
+console.log("_____________________")
+postOrderTraversal(num1);
+console.log("_____________________")
+inOrderTraversal(num1);
