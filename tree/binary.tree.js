@@ -106,6 +106,24 @@ function sumTreeWithBFT(root){
 
 
 
+// Implementing summing tree using depth first search
+
+function sumTreeWithDFT(root, target){
+    const stack = [root];
+    let sum = 0;
+    while(stack.length > 0){
+        const cur = stack.pop();
+        sum += cur.val;
+        if(cur.right !==null){
+            stack.push(cur.right)
+        }
+        if(cur.left !== null){
+            stack.push(cur.left)
+        }
+    }
+    return sum;
+}
+
 
 // Build the tree from a list of nodes.
 
@@ -171,3 +189,4 @@ depthFirstTraverse(num1);
 console.log(depthFirstSearch(num1, 5));
 console.log(depthFirstSearch(num1, 9));
 
+console.log(sumTreeWithDFT(num1))
