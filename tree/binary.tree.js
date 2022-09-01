@@ -46,9 +46,24 @@ function BreadthFirstTraverse(root){
         }
     }
 }
+function BreadthFirstSearch(root, target){
+    const queue = [root];
 
+    while(queue.length > 0){
+        const curr = queue.shift();
+        if(target === curr.val) return true;
+        if(curr.left !== null){
+            queue.push(curr.left)
+        }
+        if(curr.right !== null){
+            queue.push(curr.right)
+        }
+    }
+    return false;
+}
 
 
 BreadthFirstTraverse(a)
 
 console.log(BreadthFirstSearch(a, 'd'));
+console.log(BreadthFirstSearch(a, 'z'));
