@@ -15,24 +15,10 @@ const e = new Node('e');
 const f = new Node('f');
 
 
-/*       a
 
-    b         c
-
- d    e            f
-
-
-*/
-
-
-a.left = b;
-a.right = c;
-b.left =  d;
-b.right = e;
-c.right = f;
 
 // Implementing a breadth first search traversal
-function BreadthFirstTraverse(root){
+function breadthFirstTraverse(root){
     const queue = [root];
 
     while(queue.length > 0){
@@ -47,8 +33,25 @@ function BreadthFirstTraverse(root){
     }
 }
 
+//  Implemening depth first traversal
+ function depthFirstTraverse(root){
+    const stack = [root];
+    while(stack.length > 0){
+        const cur = stack.pop();
+        console.log(cur.val)
+        if(cur.right !==null){
+            stack.push(cur.right)
+        }
+        if(cur.left !== null){
+            stack.push(cur.left)
+        }
+    }
+}
+
+
+
 // Implementing breadth first search 
-function BreadthFirstSearch(root, target){
+function breadthFirstSearch(root, target){
     const queue = [root];
 
     while(queue.length > 0){
@@ -63,6 +66,9 @@ function BreadthFirstSearch(root, target){
     }
     return false;
 }
+
+
+
 
 // Implementing a binary sumTree  using breadth first traversal
 function sumTreeWithBFT(root){
@@ -83,6 +89,36 @@ function sumTreeWithBFT(root){
 }
 
 
+
+
+
+// Build the tree from a list of nodes.
+
+/*       a
+
+    b         c
+
+ d    e            f
+
+
+*/
+
+a.left = b;
+a.right = c;
+b.left =  d;
+b.right = e;
+c.right = f;
+
+
+// Build a binary tree from a list of nodes 
+/*       8
+
+    5         4
+
+ 3    6            2
+
+
+*/
 const num1 = new Node(8);
 const num2 = new Node(5);
 const num3 = new Node(4);
@@ -97,17 +133,23 @@ num2.right = num5;
 num3.right = num6;
 
 
-BreadthFirstTraverse(a)
+breadthFirstTraverse(a)
 
-console.log(BreadthFirstSearch(a, 'd'));
-console.log(BreadthFirstSearch(a, 'z'));
+console.log(breadthFirstSearch(a, 'd'));
+console.log(breadthFirstSearch(a, 'z'));
 
 
 console.log("_____________________")
 
-BreadthFirstTraverse(num1);
+breadthFirstTraverse(num1);
 
-console.log(BreadthFirstSearch(num1, 5));
-console.log(BreadthFirstSearch(num1, 9));
+console.log(breadthFirstSearch(num1, 5));
+console.log(breadthFirstSearch(num1, 9));
 
 console.log(sumTreeWithBFT(num1))
+
+console.log("_____________________")
+
+
+depthFirstTraverse(num1);
+
