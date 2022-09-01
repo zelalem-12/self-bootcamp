@@ -6,4 +6,12 @@ class Node{
     }
 }
 
-module.exports = Node;
+
+class NNode{
+    constructor(val, children){
+        this.val = val === undefined ? 0 : val;
+        this.children =  children === undefined ? null : children;
+    }
+}
+
+module.exports = {Node, NNode};

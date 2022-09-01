@@ -1,4 +1,4 @@
-const Node = require('./node')
+const {Node, NNode} = require('./node')
 
 
 /* 
@@ -68,4 +68,85 @@ function preOrderTraversal(root) {
 };
 
 
-console.log(preOrderTraversal(first))
+//console.log(preOrderTraversal(first))
+
+
+
+
+/* 
+Given the root of a binary tree, return the postorder traversal of its nodes' values.
+
+ 
+      1
+            2
+          
+          3  
+    
+
+Input: root = [1,null,2,3]
+Output: [3,2,1]
+
+*/
+
+
+function postOrderTraversal(root){
+    const output = [];
+    function _postOrderTraversal(node){
+        if(node === null) return;
+        _postOrderTraversal(node.left);
+        _postOrderTraversal(node.right);
+        output.push(node.val);
+    }
+    _postOrderTraversal(root);
+    return output;
+}
+
+
+// console.log(postOrderTraversal(first));
+
+
+
+/* 
+
+Given the root of an n-ary tree, return the postorder traversal of its nodes' values.
+
+Nary-Tree input serialization is represented in their level order traversal.
+ Each group of children is separated by the null value (See examples)
+
+          1
+
+   3      2     4
+    
+5    6       
+    
+
+
+
+*/
+
+
+
+
+const six = new NNode(6);
+const five = new NNode(5);
+const two2 = new NNode(2);
+const four = new NNode(4);
+const three3 = new NNode(3,[five, six]);
+const first1 = new NNode(1,[three3, two2, four]);
+
+
+function postorder(root){
+    const output = [];
+    function _postOrder(node){
+        if(node === null) return;
+        if(node.children !== null){
+            for(const child of node.children)
+            _postOrder(child);
+        }
+        output.push(node.val)
+    }
+    _postOrder(root);
+    return output;
+}
+
+console.log(postorder(first1))
