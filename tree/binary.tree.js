@@ -67,6 +67,22 @@ function breadthFirstSearch(root, target){
     return false;
 }
 
+// Implementing depth first search
+
+function depthFirstSearch(root, target){
+    const stack = [root];
+    while(stack.length > 0){
+        const cur = stack.pop();
+        if(cur.val === target) return true;
+        if(cur.right !==null){
+            stack.push(cur.right)
+        }
+        if(cur.left !== null){
+            stack.push(cur.left)
+        }
+    }
+    return false;
+}
 
 
 
@@ -87,7 +103,6 @@ function sumTreeWithBFT(root){
     }
     return sum;
 }
-
 
 
 
@@ -152,4 +167,7 @@ console.log("_____________________")
 
 
 depthFirstTraverse(num1);
+
+console.log(depthFirstSearch(num1, 5));
+console.log(depthFirstSearch(num1, 9));
 
