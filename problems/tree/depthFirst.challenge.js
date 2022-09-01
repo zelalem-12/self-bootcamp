@@ -37,4 +37,35 @@ function inOrderTraversal(root){
     return result;
 }
 
-console.log(inOrderTraversal(first))
+//console.log(inOrderTraversal(first))
+
+
+/* 
+
+Given the root of a binary tree, return the preorder traversal of its nodes' values.
+
+      1
+            2
+          
+          3  
+    
+
+Input: root = [1,null,2,3]
+Output: [1,2,3]
+*/
+
+
+function preOrderTraversal(root) {
+    const output = [];
+   function _preOrderTraversal(node){
+        if(node === null) return;
+        output.push(node.val)
+         _preOrderTraversal(node.left);
+         _preOrderTraversal(node.right);
+    }
+    _preOrderTraversal(root);
+    return output;
+};
+
+
+console.log(preOrderTraversal(first))
