@@ -134,7 +134,7 @@ const four = new NNode(4);
 const three3 = new NNode(3,[five, six]);
 const first1 = new NNode(1,[three3, two2, four]);
 
-
+// N-ary post order traversal
 function postorder(root){
     const output = [];
     function _postOrder(node){
@@ -149,4 +149,8 @@ function postorder(root){
     return output;
 }
 
+
+/* 
+Note: In order traversal is't applicable for N-ary tree problem.
+*/
 console.log(postorder(first1))
