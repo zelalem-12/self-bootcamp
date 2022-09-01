@@ -137,7 +137,7 @@ function sumTreeWithBFT(root){
 
 // Implementing summing tree using depth first search
 
-function sumTreeWithDFT(root, target){
+function sumTreeWithDFT(root){
     const stack = [root];
     let sum = 0;
     while(stack.length > 0){
@@ -151,6 +151,12 @@ function sumTreeWithDFT(root, target){
         }
     }
     return sum;
+}
+
+function sumTreeUsingPreOrderTraversing(root){
+    if(root === null) return 0;
+  return root.val + sumTreeUsingPreOrderTraversing(root.left) +  sumTreeUsingPreOrderTraversing(root.right);
+   
 }
 
 
@@ -169,7 +175,7 @@ a.left = b;
 a.right = c;
 b.left =  d;
 b.right = e;
-c.right = f;
+c.right = f;   
 
 
 // Build a binary tree from a list of nodes 
@@ -219,6 +225,7 @@ console.log(depthFirstSearch(num1, 5));
 console.log(depthFirstSearch(num1, 9));
 
 console.log(sumTreeWithDFT(num1));
+console.log(sumTreeUsingPreOrderTraversing(num1));
 console.log("________BFS _____________")
 
 preOrderTraversal(num1);
