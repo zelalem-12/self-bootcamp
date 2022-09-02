@@ -1,6 +1,4 @@
 /* 
-Vertices and Edge Lists 
-
            A ----------  B
            -         -
            -      C
@@ -11,7 +9,10 @@ Vertices and Edge Lists
 
 */
 
-const Vertices = ["A", "B", "C", "D", "E"];
+//================================Vertices and Edge Lists ================================
+
+
+const vertices = ["A", "B", "C", "D", "E"];
 const edges = [
     ["A", "B"],
     ["A", "D"],
@@ -53,3 +54,45 @@ console.log(findAdjacentNodes("E"))
 
 console.log(isConnected("A", "C"));
 console.log(isConnected("B", "C"))
+
+
+//================================V Adjacency Matrix ================================
+
+
+const adjacencyMatric = [
+[0, 1, 0, 1, 0],
+[1, 0, 1, 0, 0],
+[0, 1, 0, 1, 1],
+[1, 0, 1, 0, 1],
+[0, 0, 1, 1, 0]
+]
+
+
+const verticesMap = {"A":0, "B":1, "C":2, "D":3, "E":4};
+
+
+// find adjacentNodes
+
+function findAdjaceentNodesMatric(node){
+    const adjacentNodes = [];
+    const nodeIndex = verticesMap[node];
+    for(let i = 0; i < vertices.length && nodeIndex > -1; i++){
+        if(adjacencyMatric[nodeIndex][i] === 1) adjacentNodes.push(vertices[i]);
+    }
+    return adjacentNodes;
+}
+
+
+function isConnectedMatric(nodeOne, nodeTwo){
+    const indexOne = verticesMap[nodeOne];
+    const indexTwo = verticesMap[nodeTwo];
+    return !!adjacencyMatric[indexOne][indexTwo];
+}
+
+console.log(findAdjaceentNodesMatric("A"));
+console.log(findAdjaceentNodesMatric("C"))
+console.log(findAdjaceentNodesMatric("E"))
+
+
+console.log(isConnectedMatric("A", "C"));
+console.log(isConnectedMatric("B", "C"))
