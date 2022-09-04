@@ -1,4 +1,25 @@
-const {dataSet} = require('../data')
+const {dataSet} = require('../data');
+
+/**
+ * 
+ * @param {number[]} nums
+ * @return {number}
+ * 
+ *  */ 
+ //const nums3 = [5,4,-1,7,8];
+function maximumSubArraySumFast(nums){
+  // internal function to get the maximum of thow numers
+  const getMax =(num1, num2) => num1 > num2 ? num1 : num2;
+  let global_maximum = Number.NEGATIVE_INFINITY;
+  let current_maximum_sum = 0;
+  for(let i = 0; i < nums.length; i++){
+      current_maximum_sum = getMax(nums[i], nums[i] + current_maximum_sum);
+      global_maximum = getMax(current_maximum_sum, global_maximum);
+  }
+  return global_maximum;
+}
+
+
 
 /**
 * @param {number[]} nums
@@ -6,28 +27,43 @@ const {dataSet} = require('../data')
 */
 
 function maximumSubArraySum(nums){
-    let maxSum = -Infinity;
+    let global_maximum = -Infinity;
     for(let i = 0; i < nums.length; i++){
-        let localMax = 0;
+      let local_maximum = -Infinity;
+        let sum = 0;
         for(let j = i; j < nums.length ; j++){
-            localMax += nums[j];
-            if(localMax > maxSum){
-                maxSum = localMax;
+            sum += nums[j];
+            if(sum > local_maximum){
+                local_maximum = sum;
             }
         }
+        if(local_maximum > global_maximum){
+            global_maximum = local_maximum;
+        }
     }
-    return maxSum;
+    return global_maximum;
 }
 const nums1 = [-2,1,-3,4,-1,2,1,-5,4];
 const nums2 = [1];
 const nums3 = [5,4,-1,7,8];
 const nums4 = [-2,1,-3,4,-1,2,1,-5,4];
 const nums5 = [1,2,3,-2,5]
-// console.log(maximumSubArraySum(nums1))
-// console.log(maximumSubArraySum(nums2))
-// console.log(maximumSubArraySum(nums3));
-// console.log(maximumSubArraySum(nums4))
-// console.log(maximumSubArraySum(nums5))
+console.log(maximumSubArraySum(nums1))
+console.log(maximumSubArraySum(nums2))
+console.log(maximumSubArraySum(nums3));
+console.log(maximumSubArraySum(nums4))
+console.log(maximumSubArraySum(nums5))
 console.time('start')
 console.log(maximumSubArraySum(dataSet))
-console.timeEnd('start')
+console.timeEnd('start');
+
+console.log("========= Fast =========")
+
+console.log(maximumSubArraySumFast(nums1))
+console.log(maximumSubArraySumFast(nums2))
+console.log(maximumSubArraySumFast(nums3));
+console.log(maximumSubArraySumFast(nums4))
+console.log(maximumSubArraySumFast(nums5))
+console.time('start')
+console.log(maximumSubArraySumFast(dataSet))
+console.timeEnd('start');
