@@ -32,7 +32,7 @@ function maximumSubArraySum(nums){
       let local_maximum = -Infinity;
         let sum = 0;
         for(let j = i; j < nums.length ; j++){
-            sum += nums[j];
+            sum += nums[j]; 
             if(sum > local_maximum){
                 local_maximum = sum;
             }
@@ -69,6 +69,22 @@ function maximumSubArrayProduct(nums){
     return global_maximum;
 }
 
+function maximumSubArrayProductFast(nums){
+    const getMax = (num1, num2) => num1 > num2 ? num1 : num2;
+    const getMin = (num1, num2) => num1 > num2 ? num2 : num1;
+    let global_maximum = Number.NEGATIVE_INFINITY;
+    let current_minimum_product  = 1;
+    let current_maximum_product =  1;
+    for(let i = 0; i < nums.length; i++){
+        if(nums[i] < 0){
+            [current_minimum_product,current_maximum_product] = [current_maximum_product,current_minimum_product];
+        }
+        current_minimum_product = getMin(nums[i], nums[i] * current_minimum_product);//2, 3, -12, -48, 
+        current_maximum_product = getMax(nums[i], nums[i] * current_maximum_product); // 2, 6,  -2, 4
+        global_maximum = getMax(current_maximum_product, global_maximum);
+    }
+    return global_maximum;
+}
 
 
 
@@ -103,3 +119,13 @@ const num6 = [2,3,-2,4];
 const num7 = [-2,3,-4];
 console.log(maximumSubArrayProduct(num6));
 console.log(maximumSubArrayProduct(num7));
+console.time('start')
+console.log(maximumSubArrayProduct(dataSet))
+console.timeEnd('start');
+
+console.log("++++++++++++++++++++++++++")
+console.log(maximumSubArrayProductFast(num6));
+console.log(maximumSubArrayProductFast(num7));
+console.time('start')
+console.log(maximumSubArrayProductFast(dataSet))
+console.timeEnd('start');
