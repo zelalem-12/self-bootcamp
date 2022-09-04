@@ -56,7 +56,7 @@ console.log(isConnected("A", "C"));
 console.log(isConnected("B", "C"))
 
 
-//================================V Adjacency Matrix ================================
+//================================ Adjacency Matrix ================================
 
 
 const adjacencyMatric = [
@@ -96,3 +96,70 @@ console.log(findAdjaceentNodesMatric("E"))
 
 console.log(isConnectedMatric("A", "C"));
 console.log(isConnectedMatric("B", "C"))
+
+
+
+
+// ================================ Adjacency Matrix ================================
+
+
+
+class Node{
+    constructor(val){
+        this.value = val;
+        this.edgesList = []
+    }
+    connect(node){
+        this.edgesList.push(node);
+        node.edgesList.push(this)
+    }
+    adjacentNodes(){
+        return this.edgesList.map(node => node.value)
+    }
+    isConnected(node){
+        return this.edgesList.map(edge => edge.value).indexOf(node.value) > -1
+    }
+}
+
+
+class Graph{
+    constructor(nodes){
+        this.nodes = [...nodes]
+    }
+    addToGraph(node){
+        this.nodes.push(node)
+    }
+}
+const nodeA =  new Node('A');
+const nodeB =  new Node('B');
+const nodeC =  new Node('C');
+const nodeD =  new Node('D');
+const nodeE =  new Node('E');
+
+
+
+const graph = new Graph([nodeA, nodeB, nodeC, nodeD, nodeE]);
+
+nodeA.connect(nodeB);
+nodeA.connect(nodeD);
+nodeB.connect(nodeC);
+nodeC.connect(nodeD);
+nodeC.connect(nodeE);
+nodeD.connect(nodeE);
+
+for(const node of graph.nodes){
+console.log(`Node ${node.value}`);
+for(const connectedNode of node.edgesList){
+    console.log(`Node ${node.value} is conneted to ${connectedNode.value}`)
+}
+}
+
+console.log(nodeC.adjacentNodes());
+console.log(nodeA.isConnected(nodeC));
+console.log(nodeB.isConnected(nodeC))
+
+
+/* 
+1# directed and undirected graph
+1# weighted and unweighted graph
+*/
