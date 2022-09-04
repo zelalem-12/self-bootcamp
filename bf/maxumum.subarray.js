@@ -43,27 +43,63 @@ function maximumSubArraySum(nums){
     }
     return global_maximum;
 }
-const nums1 = [-2,1,-3,4,-1,2,1,-5,4];
-const nums2 = [1];
-const nums3 = [5,4,-1,7,8];
-const nums4 = [-2,1,-3,4,-1,2,1,-5,4];
-const nums5 = [1,2,3,-2,5]
-console.log(maximumSubArraySum(nums1))
-console.log(maximumSubArraySum(nums2))
-console.log(maximumSubArraySum(nums3));
-console.log(maximumSubArraySum(nums4))
-console.log(maximumSubArraySum(nums5))
-console.time('start')
-console.log(maximumSubArraySum(dataSet))
-console.timeEnd('start');
+/**
+ * 
+ * @param {number[]} nums
+ * @return {number}
+ * 
+ *  */ 
 
-console.log("========= Fast =========")
+function maximumSubArrayProduct(nums){
+    let global_maximum = Number.NEGATIVE_INFINITY;
 
-console.log(maximumSubArraySumFast(nums1))
-console.log(maximumSubArraySumFast(nums2))
-console.log(maximumSubArraySumFast(nums3));
-console.log(maximumSubArraySumFast(nums4))
-console.log(maximumSubArraySumFast(nums5))
-console.time('start')
-console.log(maximumSubArraySumFast(dataSet))
-console.timeEnd('start');
+    for(let i = 0; i < nums.length; i++){
+        let local_maximum = Number.NEGATIVE_INFINITY;
+        let product =1;
+        for(let j = i; j < nums.length; j++){
+             product *= nums[j];
+            if(product > local_maximum){
+                local_maximum = product;
+            }
+        }
+        if(local_maximum > global_maximum){
+            global_maximum = local_maximum;
+        }
+    }
+    return global_maximum;
+}
+
+
+
+
+// const nums1 = [-2,1,-3,4,-1,2,1,-5,4];
+// const nums2 = [1];
+// const nums3 = [5,4,-1,7,8];
+// const nums4 = [-2,1,-3,4,-1,2,1,-5,4];
+// const nums5 = [1,2,3,-2,5]
+// console.log(maximumSubArraySum(nums1))
+// console.log(maximumSubArraySum(nums2))
+// console.log(maximumSubArraySum(nums3));
+// console.log(maximumSubArraySum(nums4))
+// console.log(maximumSubArraySum(nums5))
+// console.time('start')
+// console.log(maximumSubArraySum(dataSet))
+// console.timeEnd('start');
+
+// console.log("========= Fast =========")
+
+// console.log(maximumSubArraySumFast(nums1))
+// console.log(maximumSubArraySumFast(nums2))
+// console.log(maximumSubArraySumFast(nums3));
+// console.log(maximumSubArraySumFast(nums4))
+// console.log(maximumSubArraySumFast(nums5))
+// console.time('start')
+// console.log(maximumSubArraySumFast(dataSet))
+// console.timeEnd('start');
+
+
+
+const num6 = [2,3,-2,4];
+const num7 = [-2,3,-4];
+console.log(maximumSubArrayProduct(num6));
+console.log(maximumSubArrayProduct(num7));
