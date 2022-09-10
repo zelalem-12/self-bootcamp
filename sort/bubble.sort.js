@@ -17,16 +17,18 @@ With each pass the largest elemnt in th unsorted part will be bubbled into the h
 half.
 After n passes its granted that the items are sorted 
 
+
+       // There is no swap in each pass that means all items are in the correct position
+         // We need to beak out from the loop;
+
 */
 
 
 function bubbleSort(nums){
     const n = nums.length;
     for(let i = 0; i < n ; i++){
-         // There is no swap in each pass that means all items are in the correct position
-         // We need to beak out from the loop;
-        let isSwaped = false;
-        for(let j = 0; j < n - i - 1; j++){
+         let isSwaped = false;
+        for(let j = 0; j < n - 1; j++){
             if(nums[j] > nums[j + 1]){
                 [nums[j + 1], nums[j]] = [nums[j], nums[j + 1]];
                 isSwaped = true;
