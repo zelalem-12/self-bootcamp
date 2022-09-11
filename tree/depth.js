@@ -10,6 +10,20 @@ function treeHeight(root) {
    return _treeHeight(root);
 }
 
+
+function minDepth(root) {
+    function _minDepth(node){
+        if(node === null) return 0;
+        if(node.left === null && node.right === null)  return 1;
+        if(node.left === null) return _minDepth(node.right) + 1;
+        if(node.right === null) return _minDepth(node.left) + 1;
+        
+        return Math.min(_minDepth(node.left), _minDepth(node.right)) + 1;
+    }
+    return _minDepth(root);
+};
+
+
 // Driving data
 
 
@@ -37,7 +51,9 @@ num3.right = num6;
 
 
 const data = {
-    depth: treeHeight(num1)
+    height: treeHeight(num1),
+    minDepth: minDepth(num1)
+
 }
 
 console.log(data)
