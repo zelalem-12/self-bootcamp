@@ -98,30 +98,38 @@ function postOrderTraversal(root){
 
     // Iterative solution    4, 6, 
 
-    //  const stack = [];
-    //  let current  = root;
-    //     while(current !== null || stack.length > 0){
-    //         while(current !== null)  {
-    //            if(current.right !== null){
-    //             stack.push(current.right);
-    //            } 
-    //             current = current.left;
-    //         } 
-    //         current = stack.pop();
-    //         result.push(current.data);
-    //         current = current.right;
-    //     }
-     
-
+     const stackTree = [];
+     let current  = root;
+        while(current !== null || stackTree.length > 0){
+               if(current !== null){
+                stackTree.push(current);
+                current = current.left;
+               } else {
+                let top = stackTree[stackTree.length - 1];
+                if(top.right === null){ // a code to handel a node having no  subTree or its right sub tree already visited
+                  let temp = stackTree.pop();
+                    result.push(temp.data);
+                    top = stackTree[stackTree.length - 1]
+                    while(stackTree.length !== 0 && temp === top.right){
+                        temp = stackTree.pop();
+                        result.push(temp.data);
+                        top = stackTree[stackTree.length - 1];
+                    }
+                }
+                else {
+                    current = top.right;
+                }
+               }
+            }
      // Recursive Solution 
 
-     function _postOrderTraversal(node){
-        if(node === null) return;   
-        _postOrderTraversal(node.left);
-        _postOrderTraversal(node.right);
-         result.push(node.data);
-     }
-     _postOrderTraversal(root);
+    //  function _postOrderTraversal(node){
+    //     if(node === null) return;   
+    //     _postOrderTraversal(node.left);
+    //     _postOrderTraversal(node.right);
+    //      result.push(node.data);
+    //  }
+    //  _postOrderTraversal(root);
      
      return result;
 }
