@@ -2,7 +2,7 @@ const { BinaryTree } = require('./node')
 
 function treeHeight(root) {
     function _treeHeight(node){
-        if(node === null) return -1;
+        if(node === null) return 0;
         const LeftDepth = _treeHeight(node.left);
         const rightDepth = _treeHeight(node.right);
         return Math.max(LeftDepth, rightDepth) + 1;
