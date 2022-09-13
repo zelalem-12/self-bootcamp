@@ -1,4 +1,9 @@
 function getPermutations(arr){
+    function _swap(arr, start, i){
+        if(start !== i) {
+            [ arr[start], arr[i]] = [arr[i], arr[start]];
+        }
+    }
     const permutations = [];
     function _getPermutations(arr, left, right){
         if(left === right) {
@@ -6,15 +11,17 @@ function getPermutations(arr){
             return;
         };
         for(let i = left; i <= right; i++){
-            [ arr[left], arr[i]] = [arr[i], arr[left]]; 
+            _swap(arr,left, i); 
             _getPermutations(arr, left + 1, right);
-            [ arr[left], arr[i]] = [arr[i], arr[left]]; 
+            _swap(arr,left, i); 
         }
     }
     _getPermutations(arr, 0, arr.length - 1);
    return permutations;
 }
+console.time('backtracking')
 console.log(getPermutations([1, 3, 2]));
+console.timeEnd('backtracking')
 
 
 /* 
@@ -38,5 +45,9 @@ At each position we have n number options to take  here at first postion I can t
     2          3            1        3          2       1             call at n - 1 time 
    
 3                2        3              1     1            2           call at n - 2
+
+
+
+permutate(arr, 0) Initial call
 
 */
