@@ -24,6 +24,22 @@ function minDepth(root) {
 };
 
 
+
+function maxDethNarray(root){
+    function _maxDepth(node){
+        if(node === null) return 0;
+        let maxDepth = 1;
+        for(let child of node.children){
+            const childDepth = 1 + _maxDepth(child);
+            if(childDepth > maxDepth){
+                maxDepth = childDepth;
+            }
+         }
+         return maxDepth;
+        }
+        return _maxDepth(root);
+}
+
 // Driving data
 
 
@@ -52,7 +68,8 @@ num3.right = num6;
 
 const data = {
     height: treeHeight(num1),
-    minDepth: minDepth(num1)
+    minDepth: minDepth(num1),
+    Ndepth: maxDethNarray(num1)
 
 }
 
