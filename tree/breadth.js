@@ -67,6 +67,34 @@ function levelOrderTraverse(root){
     return output;
 }
 
+
+
+var levelOrderBottom = function(root) {
+    if(root === null) return [];
+    
+    const result = [];
+    
+    const queueTree = [root];
+    
+    
+    while(queueTree.length > 0){
+        const levelNodes  = [];
+        let queuedNodes = queueTree.length;
+        
+        while(queuedNodes > 0){
+            const current = queueTree.shift();
+            queuedNodes--;
+            levelNodes.push(current.data);
+            if(current.left !== null) queueTree.push(current.left);
+            if(current.right !== null) queueTree.push(current.right);
+        }
+        result.push(levelNodes);
+    }
+    return result.reverse()
+};
+
+
+
 // Driving data
 
 
@@ -94,7 +122,8 @@ num3.right = num6;
 
 
 const data = {
-    levelOrder: levelOrderTraverse(num1)
+    levelOrder: levelOrderTraverse(num1),
+    levelOrderBottom:levelOrderBottom(num1)
 
 }
 
