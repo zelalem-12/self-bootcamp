@@ -30,14 +30,32 @@ function iterativeNodeInsert(arr, key){
 
 // A Function to heapify ith node  in aheap of size n(array.length;) following bottom up aproach
 
-function heapify(arr, i){
+// heapify the last element
+function heapifyLastItem(arr, i){
     let parent = Math.floor((i - 1)/2);
     if(arr[i] > arr[parent]){
         [arr[i], arr[parent]] = [arr[parent], arr[i]];
         heapify(arr, parent);
     }
 }
+function heapifyRoot(arr, size, i){
+    let largest = i; //assume that the lartest is the root initially
+    const left =  2 * i + 1;
+    const right = 2 * i + 2;
 
+    if(left < size && arr[left] > arr[largest]){
+        largest = left;
+    }
+
+    if(right < size && arr[right] > arr[largest]){
+        largest = right;
+    }
+
+    if(largest !== i){
+        [arr[i], arr[largest]] = [arr[largest], arr[i]];
+        heapifyRoot(arr, size, largest)
+    }
+}
 
 function insertNode(arr, key){
     // first increase the size of the heap by 1;
@@ -46,12 +64,22 @@ function insertNode(arr, key){
     // To revert the distortion heapify the newly inserted element following bottom-up approach
     const newSize = arr.length + 1;
     arr[newSize - 1] = key;
-    heapify(arr, newSize - 1)
+    heapifyLastItem(arr, newSize - 1)
 
     return newSize;
 }
 
+// In heap deletion takes place at the first item mmeaning the max or min item depending the type of the  heap
+// remote and heapify because removing the firt item may distort the heap
+function deleteNode(arr){
+    const size = arr.length;
 
+    arr[0] = arr[size - 1];
+    // Reomve the last element
+    arr.pop();
+    heapifyRoot(arr, size - 1, 0);
+    return size - 1;
+}
 
 const arr = []
 arr[0] = 10;
@@ -64,7 +92,8 @@ const heap = [];
 
 const data = {
    // iterativ: iterativeNodeInsert(arr, 15),
-   recursive: insertNode(arr, 15),
+  // recursive: insertNode(arr, 15),
+  deleted: deleteNode(arr),
     heap:arr.toString()
 }
 console.log(data)
