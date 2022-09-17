@@ -112,7 +112,25 @@ function  heapSort(arr){
 
 
 
-
+function heapify(arr, n, i, isMinHeap=false){
+    let largest = i;
+    const left = 2 * + 1;
+    const right = 2 * i + 2;
+    
+    if(isMinHeap){
+        if(left >= 0 && left < n && arr[left] < arr[i]) largest = left;
+        if(right >= 0 && right < n && arr[right] < arr[i]) largest = right;
+    } else {
+        if(left >= 0 && left < n && arr[left] > arr[i]) largest = left;
+        if(right >= 0 && right < n && arr[right] > arr[i]) largest = right;
+    }
+    if(largest !== i) {
+        const temp = arr[i];
+        arr[i] = arr[largest];
+        arr[largest] = temp;
+        heapify(arr, n, largest, isMinHeap);
+    }
+}
 
 
 const arr = []
@@ -129,6 +147,7 @@ const data = {
   // recursive: insertNode(arr, 15),
   // deleted: deleteNode(arr),
  // sorted: heapSort(arr),
+ test:heapify(arr, arr.length, 0),
   heap:arr.toString()
 }
 console.log(data)
