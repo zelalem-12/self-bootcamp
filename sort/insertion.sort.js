@@ -24,4 +24,29 @@ function InsertionSort(items){
     return items;
 }
 
+function runningMedian(a) {
+       const n = a.length;
+       const medians = [];
+       
+       for(let i = 0; i < n; i++){
+           const key = a[i];
+           
+           let j = i - 1;
+           while(j >=0 && a[j] > key){
+               a[j + 1] = a[j];
+               j--;
+             }
+          a[j + 1] = key;
+          const middleIndex = Math.floor(i /2);
+          if( i % 2 !== 0){
+              medians.push((a[middleIndex] + a[middleIndex + 1])/2);
+          } else medians.push(a[middleIndex]);   
+    }
+    return medians;
+}
+
+
+
+
+
 console.log(InsertionSort([2, 5,-3, 6,1,4]))
