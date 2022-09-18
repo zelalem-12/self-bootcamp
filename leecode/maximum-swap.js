@@ -27,6 +27,32 @@ function maximumSwap(num) {
     return +list.join('');
 };
 
+function maximumSwapFast(num){
+      if(num < 10) return num;
+    
+    const digits = num.toString().split('');    
+    const digitLength = digits.length;
 
+    const maxIndexs = Array(digitLength).fill(0);
+    
+    maxIndexs[digitLength - 1] = digitLength - 1;
+    
+    for(let i = digitLength - 2; i >= 0; i--){
+        if(digits[maxIndexs[i + 1]] >= digits[i]){
+            maxIndexs[i] = maxIndexs[i + 1];
+        } else {
+            maxIndexs[i] = i;
+        }
+    }  
+    
+    for(let i = 0; i < digitLength; i++){
+        if(digits[maxIndexs[i]]  > digits[i]){
+            [digits[i], digits[maxIndexs[i]]] = [digits[maxIndexs[i]], digits[i]];
+            break;
+        }
+    }
+    
+    return +digits.join('');
+}
 
 console.log(maximumSwap(2736))
