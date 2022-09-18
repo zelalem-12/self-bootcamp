@@ -53,8 +53,8 @@ function SortestPath(graph, source){
             if(
                 !visitedVerticesSet[v] && 
                 graph[currentVerticesIndex][v] !== 0 &&
-                sourceDistances[u] !== Number.POSITIVE_INFINITY &&
-                sourceDistances[u] + graph[currentVerticesIndex][v] < sourceDistances[v]
+                sourceDistances[currentVerticesIndex] !== Number.POSITIVE_INFINITY &&
+                sourceDistances[currentVerticesIndex] + graph[currentVerticesIndex][v] < sourceDistances[v]
                 ){
                     sourceDistances[v] = sourceDistances[currentVerticesIndex] + graph[currentVerticesIndex][v]
                 }
