@@ -7,20 +7,32 @@ var MedianFinder = function() {
     this.heapify = function(nodeIndex, heapType="max"){
         if(nodeIndex <= 0) return;
         
+        let otherChild  = nodeIndex + 1;
+        if(nodeIndex % 2 === 0) otherChild = nodeIndex - 1;
         const parent = Math.floor((nodeIndex - 1) / 2);
         
-        if(heapType === "min"){
-            if(this.minHeap[nodeIndex] < this.minHeap[parent]){
-                [this.minHeap[parent], this.minHeap[nodeIndex]] = [this.minHeap[nodeIndex], this.minHeap[parent]];
-                this.heapify(parent, "min");
+        if(heapType === "min") {
+            let smallerChildKey = nodeIndex;
+            if(this.minHeap[otherChild] !== undefined  &&  this.minHeap[otherChild] < this.minHeap[smallerChildKey]){
+                smallerChildKey = otherChild;
             }
+            if(this.minHeap[smallerChildKey] < this.minHeap[parent]){
+                [this.minHeap[parent], this.minHeap[smallerChildKey]] = [this.minHeap[smallerChildKey], this.minHeap[parent]];
+            }
+            this.heapify(parent, "min");
             return;
+        
         }
-        if(this.maxHeap[nodeIndex] > this.maxHeap[parent]){
-           console.log({key:nodeIndex});
-            [this.maxHeap[parent], this.maxHeap[nodeIndex]] = [this.maxHeap[nodeIndex], this.maxHeap[parent]];
-            this.heapify(parent);
+
+        let largerChildKey = nodeIndex;
+        if(this.maxHeap[otherChild] !== undefined  &&  this.maxHeap[otherChild] > this.maxHeap[largerChildKey]){
+            largerChildKey = otherChild;
         }
+        
+        if(this.maxHeap[largerChildKey] > this.maxHeap[parent]){
+            [this.maxHeap[parent], this.maxHeap[largerChildKey]] = [this.maxHeap[largerChildKey], this.maxHeap[parent]];
+        }
+        this.heapify(parent);
         return;
     }
 };
@@ -38,8 +50,6 @@ MedianFinder.prototype.addNum = function(num) {
         return;
     };
     
-    
-   
     if(minHeapSize === 0 ){
         if(num >= this.maxHeap[0]) {
             this.minHeap.push(num);
@@ -50,29 +60,16 @@ MedianFinder.prototype.addNum = function(num) {
         return;
     }
     
-    const minHeapRoot = this.minHeap[0];    
-    const maxHeapRoot = this.maxHeap[0];
-    
-    
     if(maxHeapSize > minHeapSize){
         
-        if(num < maxHeapRoot){
+        if(num < this.maxHeap[0]){
             
-            this.minHeap[minHeapSize] = maxHeapRoot;
-           
-           
-            console.log(this.maxHeap)
+            this.minHeap[minHeapSize] = this.maxHeap[0];
+            this.heapify(minHeapSize, "min");      // Maintaint the heap property of the second half
+
             this.maxHeap.shift();
-            console.log(this.maxHeap)
             this.maxHeap.push(num); 
-            console.log({num,MaxH:this.maxHeap, maxHeapSize, sizeN:this.maxHeap.length})
-            this.heapify(maxHeapSize - 1); // Maintain the heap  property of the first half;
-          maxHeapSize === 3?   console.log(this.maxHeap):null
-            
-            
-             this.heapify(minHeapSize, "min");// Maintaint the heap property of the second half
-            
-            
+            this.heapify(maxHeapSize - 1);         // Maintain the heap  property of the first half; 
             return;
         }
         this.minHeap[minHeapSize] = num;
@@ -80,40 +77,31 @@ MedianFinder.prototype.addNum = function(num) {
         return;
     }
     
-    if(num <= minHeapRoot){
-       // num === 0? console.log({MaxH: this.maxHeap, num, minH:this.minHeap}):null
-        
+    if(num <= this.minHeap[0]){
         this.maxHeap[maxHeapSize] = num;
-        
-       // num === 0? console.log({MaxH: this.maxHeap,maxHeapSize}) : null;
-        
-        this.heapify(maxHeapSize); // Maintain the heap  property of the first half;
-      
-        
-        // num === 0? console.log({MaxH: this.maxHeap}) : null;
+        this.heapify(maxHeapSize);            // Maintain the heap  property of the first half;
         return;
     }
     
-    this.maxHeap[maxHeapSize] = minHeapRoot;
-    this.heapify(maxHeapSize); // Maintain the heap  property of the first half;
+    this.maxHeap[maxHeapSize] = this.minHeap[0];
+    this.heapify(maxHeapSize);                // Maintain the heap  property of the first half;
     
     this.minHeap.shift();
     this.minHeap.push(num);
-    this.heapify(minHeapSize - 1, "min"); // Heapify the root item(updated item);
+    this.heapify(minHeapSize - 1, "min");    // Heapify the root item(updated item);
 }
 
 /**
  * @return {number}
  */
 MedianFinder.prototype.findMedian = function() {
-   // console.log(this.maxHeap, this.minHeap);
+   
     const maxHeapSize = this.maxHeap.length;
     const minHeapSize = this.minHeap.length;
     
     if(maxHeapSize !== minHeapSize)   return this.maxHeap[0];
     
     return (this.maxHeap[0] + this.minHeap[0]) / 2;
-    
 };
 
 /**
