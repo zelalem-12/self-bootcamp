@@ -47,18 +47,16 @@ function merge(list1, list2){
 * @param {ListNode} head
 * @return {ListNode}
 */
-var sortList = function(head) {
+
+function mergeSort(head) {
   
   if(head === null || head.next === null ) return head;
   
   let middle = getMid(head);
   
-  let left = head;  
-  let right = middle.next;
+  let leftHead = head;  
+  let rightHead = middle.next;
   middle.next = null;
   
-  const leftList = sortList(left);
-  const rightList = sortList(right);
-  
-  return merge(leftList, rightList);
+  return merge(mergeSort(leftHead), mergeSort(rightHead));
 };
