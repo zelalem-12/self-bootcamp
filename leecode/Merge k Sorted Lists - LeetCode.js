@@ -6,8 +6,7 @@
      this.next = (next===undefined ? null : next)
  }
 
-
-//  Brute Force Solution 
+ //  Brute Force Solution 
 
 /**
 * @param {ListNode[]} lists
@@ -40,8 +39,7 @@ function mergeKLists(lists) {
 
 
 // Merge the two lists one by one;
-
-  function mergeTwoListsBrutFOrce(listOne, listTwo){
+function mergeTwoListsBrutForce(listOne, listTwo){
     if(listOne  === null) return listTwo;
     if(listTwo === null) return listOne;
     
@@ -92,4 +90,67 @@ function mergeKLists(lists) {
     
     
     return head;
+};
+
+
+// Using divide and Conqure
+/**
+ * Definition for singly-linked list.
+function ListNode(val, next) {
+     this.val = (val===undefined ? 0 : val)
+      this.next = (next===undefined ? null : next)
+  }
+ */
+
+  function mergeTwoLists(listOne, listTwo){
+    if(listOne  === null) return listTwo;
+    if(listTwo === null) return listOne;
+    console.log(listOne, listTwo)
+    let curr = null;
+    
+    if(listOne.val <= listTwo.val){
+        curr = listOne;
+        listOne = listOne.next;
+    } else {
+        curr = listTwo;
+        listTwo = listTwo.next;
+    }
+    
+    const head = curr;
+    
+    while(listOne !== null && listTwo !== null){
+        if(listOne.val <= listTwo.val){
+            curr.next = listOne;
+            listOne = listOne.next;
+        } else {
+            curr.next = listTwo;
+            listTwo = listTwo.next;
+        }
+        curr = curr.next;
+    }
+    
+    if(listOne !== null) curr.next = listOne;
+    if(listTwo !== null) curr.next = listTwo;
+    
+    return head;
+    
+}
+
+/**
+ * @param {ListNode[]} lists
+ * @return {ListNode}
+ */
+
+function mergeKListsRecursively(lists) {
+    if(lists === null || lists.length ===0) return null;
+    
+    function _mergeKLists(lists, start, end){
+        if(start === end) return lists[start];
+        const middle =  Math.floor((end + start) / 2);
+        
+        return mergeTwoLists(_mergeKLists(lists, start, middle), _mergeKLists(lists, middle + 1, end));
+    }
+    
+    return _mergeKLists(lists, 0, lists.length - 1);
+    
 };
