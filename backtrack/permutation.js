@@ -45,7 +45,34 @@ function permutationsUsingBacktracking(nums){
 }
 
 
+function permutationsUsingBacktrackingDulicates(nums){
+    function _permuteUnique(nums, permutations, currentPermute, counts){
+        if(currentPermute.length === nums.length){
+            permutations.push([...currentPermute]);
+            return;
+        }
+        for(const key in counts){
+            if(counts[key] > 0){
+                counts[key] -= 1;
+                currentPermute.push(+key);
+                _permuteUnique(nums, permutations,currentPermute, counts);
+                counts[key] += 1;
+                currentPermute.pop();
+            }
+        }
+    }
+    
+    const permutations = [];
+    const counts = [];
 
+    for(let i = 0; i < nums.length; i++){
+        counts[nums[i]] = counts[nums[i]] !== undefined ? counts[nums[i]] += 1 : 1; 
+    }
+    
+    _permuteUnique(nums, permutations, [], counts);
+    
+    return permutations;
+}
 
 
 
@@ -63,5 +90,5 @@ function permutationsUsingBacktracking(nums){
 
 
 console.time('backtrack_deplicateB')
-console.log(permutationsUsingBacktracking([1,2,3]));
+console.log(permutationsUsingBacktrackingDulicates([1,1,3]));
 console.timeEnd('backtrack_deplicateB')
