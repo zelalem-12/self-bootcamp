@@ -50,3 +50,37 @@ function longestCommonSubsequence(text1, text2) {
     return count;
 };
     
+/**
+ * @param {string} text1
+ * @param {string} text2
+ * @return {number}
+ */
+
+
+function LCS(str1, str2){
+
+    const s1 = str1.length;
+    const s2 = str2.length;
+
+    const solutions = [];
+
+    for(let i = 0; i < s1 + 1; i++){
+        solutions[i] = Array(s2 + 1).fill(0);
+    }
+
+
+    for(let i = 1; i < s1  + 1; i++){
+        for(let j = 1; j < s2 + 1; j++){
+            if(str1[i - 1] === str2[j - 1]){
+                solutions[i][j] = 1 + solutions[i - 1][j - 1];
+            } else solutions[i][j]  = Math.max(solutions[i -1][j], solutions[i][j - 1]);
+        }
+    }
+    return solutions[s1][s2];
+}
+
+
+
+
+console.log(longestCommonSubsequence('ABCDGH', "AEDFHR"));
+console.log(LCS('ABCDGH', "AEDFHR"));
