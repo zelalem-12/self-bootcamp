@@ -21,12 +21,47 @@ function getPermutations(arr){
     _getPermutations(arr, 0, arr.length - 1);
    return permutations;
 }
+
+function permutationsUsingBacktracking(nums){
+    function _permute(nums, permutations, currenPermutation, used){
+        if(currenPermutation.length === nums.length){
+            permutations.push([...currenPermutation]);
+            return;
+        }
+        for(let i = 0; i < nums.length; i++){ 
+            if(!used[nums[i]]){
+                used[nums[i]] = true
+                currenPermutation.push(nums[i]);
+                _permute(nums, permutations, currenPermutation, used);
+                used[nums[i]] = false;
+                currenPermutation.pop();    
+            }
+        }
+    }
+    const permutations = [];
+    _permute(nums, permutations, [], {});
+    
+    return permutations;
+}
+
+
+
+
+
+
 // console.time('backtracking')
 // console.log(getPermutations([1, 3, 2]));
 // console.timeEnd('backtracking')
 
 
-console.time('backtrack_deplicate')
-console.log(getPermutations([1, 1, 2]));
-console.timeEnd('backtrack_deplicate')
+// console.time('backtrack_deplicate')
+// console.log(getPermutations([1, 1, 2]));
+// console.timeEnd('backtrack_deplicate')
 
+
+
+
+
+console.time('backtrack_deplicateB')
+console.log(permutationsUsingBacktracking([1,2,3]));
+console.timeEnd('backtrack_deplicateB')
