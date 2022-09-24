@@ -23,8 +23,9 @@ function maxSubArray(nums){
     let prevMaximum = Number.NEGATIVE_INFINITY;
 
     for(let i = 0; i < nums.length; i++){
-        prevMaximum = getMax(nums[i], prevMaximum + nums[i]);
-        globalMaximum = getMax(globalMaximum, prevMaximum);
+        const currentMaximum = getMax(nums[i], prevMaximum + nums[i]);
+        globalMaximum = getMax(globalMaximum, currentMaximum);
+        prevMaximum = currentMaximum;
     }
     return globalMaximum;
 }
