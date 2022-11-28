@@ -1,3 +1,6 @@
+from ast import List
+
+
 class Solution:
     
     def searchRecursively(self,nums:List[int], left:int, right:int, target:int)-> int:
